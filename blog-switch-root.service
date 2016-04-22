@@ -1,0 +1,12 @@
+[Unit]
+Description=Tell blogd about new root
+DefaultDependencies=no
+ConditionPathExists=/etc/initrd-release
+Before=initrd-switch-root.service
+
+[Service]
+ExecStart=-/sbin/blogctl root=/sysroot
+Type=oneshot
+StandardInput=null
+StandardOutput=null
+StandardError=null

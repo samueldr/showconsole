@@ -1,0 +1,14 @@
+   Boot logging
+   ============
+
+This small package provides a daemon for for
+logging during boot time as well as some tools
+for Linux system console.
+
+ blogd - boot logging on /dev/console
+ blogctl - Control the boot loggind daemon blogd
+ blogger - writes messages to a running blogd process
+ isserial - determines if the underlying tty of stdin is a serial line
+ showconsole - determines the real tty of stdin
+ setconsole - redirect system console output to a tty
+

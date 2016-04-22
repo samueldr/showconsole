@@ -1,0 +1,47 @@
+.\"
+.\" Copyright 2003 Werner Fink, 2003 SuSE Linux AG, Germany.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.TH SHOWCONSOLE 8 "Jan 14, 2016" "Version 2.12" "The SUSE boot concept"
+.UC 8
+.SH NAME
+Isserial \- determines if the underlying tty of stdin is a serial line
+.br
+.SH SYNOPSIS
+.B isserial [< /dev/console]
+.SH DESCRIPTION
+.B iserial
+determines if the underlying character device of
+the current
+.B stdin
+is a serial line.
+This can be used on
+.I /dev/console
+as current character device to
+check if the console is a serial line.
+.PP
+The exit status of
+.B iserial
+is
+.B 0
+if
+.B stdin
+is a serial line otherwise not.
+.\"
+.SH FILES
+.TP
+.I /dev/console
+the system console.
+.\"
+.SH SEE ALSO
+.BR console (4),
+.BR tty (4),
+.SH COPYRIGHT
+2003 Werner Fink,
+2003 SuSE GmbH Nuernberg, Germany.
+.SH AUTHOR
+Werner Fink <werner@suse.de>

@@ -1,0 +1,56 @@
+.\"
+.\" Copyright 2016 Werner Fink, 2016 SUSE Linux GmbH.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.TH BLOGCTL 8 "Jan 14, 2016" "Version 2.12" "The SUSE boot concept"
+.UC 8
+.SH NAME
+blogctl \- Control the boot loggind daemon blogd
+.SH SYNOPSIS
+.\"
+.B /sbin/blogctl
+.RI [ ping | quit | root=<path> | ready | close ]
+.SH DESCRIPTION
+.B blogctl may be used to check if a
+.B blogd
+daemon is active as well as to send comands to such a daemon.
+.SH COMANDS
+The following commands are known:
+.TP
+.B ping
+Send a simply ping request if
+.B blogd
+daemon is up and running.
+.TP
+.B quit
+Cause the
+.B blogd
+daemon to finish its logging and then gracefully quits.
+.TP
+.BI root= <path>
+This command take a path as further value of the new root file
+system which is mounted e.g. in initrd.
+.TP
+.B ready
+Tells the
+.B blogd
+daemon that the file systems had becomes writable.
+.TP
+.B close
+Cause the
+.B blogd
+daemon to finish its logging only to allow
+.BR systemd (8)
+to unmount the file systems finally.
+.SH SEE ALSO
+.BR blogd (8),
+.BR systemd (1),
+.SH COPYRIGHT
+2015 Werner Fink,
+2015 SuSE Linux GmbH.
+.SH AUTHOR
+Werner Fink <werner@suse.de>

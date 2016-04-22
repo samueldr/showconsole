@@ -1,0 +1,19 @@
+[Unit]
+Description=Start Blogd at System Bootup
+DefaultDependencies=no
+ConditionKernelCommandLine=!blog.enable=0
+ConditionKernelCommandLine=!init=/bin/bash
+Wants=systemd-ask-password-blog.path
+Before=systemd-ask-password-blog.service
+Before=sysinit.target
+RefuseManualStart=true
+
+[Service]
+Type=forking
+KillMode=none
+SendSIGKILL=no
+RemainAfterExit=yes
+ExecStart=/sbin/blogd
+
+[Install]
+WantedBy=basic.target
