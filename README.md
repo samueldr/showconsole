@@ -21,5 +21,5 @@ collect them for repeating them on all devices used for the system console
 as well as it writes out a copy to boot.log and boot.old below /var/log/.
 
 Beside boot messages and logging them the blogd can handle password or
-passphrase requests send by password agents on all terminal lines used for
-the system console.
+passphrase requests send by password agents.  For those requests the blogd
+do ask on all terminal lines used for the system console.
