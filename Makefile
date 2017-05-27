@@ -71,7 +71,7 @@ TODO	=	showconsole blogd blogger blogctl isserial libblogger.so
 TODO	+=	blog-store-messages.service blogd.8 blogger.8
 L	:=	libconsole/
 CFLAGS	+=	-I ./ -I ./$(L)
-libfiles := $(wildcard $(L)*.c)
+libfiles := $(sort $(wildcard $(L)*.c))
 
 all: $(TODO)
 
