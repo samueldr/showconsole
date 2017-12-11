@@ -662,8 +662,10 @@ err:
     if (!tty)
 	error("can not allocate string");
 
-    if (consalloc(&c, tty, CON_CONSDEV, makedev(TTYAUX_MAJOR, 1), io))
-	*cons = c;
+    if (!consalloc(&c, tty, CON_CONSDEV, makedev(TTYAUX_MAJOR, 1), io))
+	error("/dev/console is not a valid fallback\n");
+
+    *cons = c;
 }
 
 /*
