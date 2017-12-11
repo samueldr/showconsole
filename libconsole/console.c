@@ -559,7 +559,7 @@ static int consalloc(struct console **cons, char *name, const int cflags, const 
     insert(&newc->node, head);
 
     if (!io)
-	return 0;
+	return 1;
 
     if ((newc->fd = open(newc->tty, O_WRONLY|O_NONBLOCK|O_NOCTTY)) < 0) {
 	if (errno == EACCES)
