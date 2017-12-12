@@ -609,6 +609,7 @@ void getconsoles(struct console **cons, int io)
     char fbuf[16], dev[64];
     char *tty = NULL;
     FILE *fc;
+    int items;
 
     if (!cons)
 	error("error: console pointer empty");
@@ -621,10 +622,15 @@ void getconsoles(struct console **cons, int io)
 	goto err;
     }
 
-    while ((fscanf(fc, "%*s %*s (%[^)]) %[0-9:]", &fbuf[0], &dev[0]) == 2)) {
+    while ((items = fscanf(fc, "%*s %*s (%[^)]) %[0-9:]", &fbuf[0], &dev[0]))
+	   != EOF) {
 	char *tmp;
 	int flags, n, maj, min;
 	int ret;
+
+	/* Ignore consoles without tty binding. */
+	if (items != 2)
+	    continue;
 
 	if (!strchr(fbuf, 'E'))
 	    continue;
