@@ -531,41 +531,14 @@ void closeIO(void)
     return;
 }
 
-/* Allocate a console */
-static list_t lcons = { &(lcons), &(lcons) };
-static int consalloc(struct console **cons, char *name, const int cflags, const dev_t dev, int io)
+static int consinitIO(struct console *newc)
 {
-    struct console *newc;
-    list_t *head;
     int tflags;
-
-    if (!cons)
-	error("missing console pointer");
-
-    if (posix_memalign((void**)&newc, sizeof(void*), alignof(struct console)+strlen(name)+1) != 0 || !newc)
-	error("memory allocation");
-
-    newc->tty = ((char*)newc)+alignof(struct console);
-    strcpy(newc->tty, name);
-    newc->flags = cflags;
-    newc->dev = dev;
-    newc->pid = -1;
-
-    if (!*cons) {
-	head = &lcons;
-	*cons = (struct console*)head;
-    } else
-	head = &(*cons)->node;
-    insert(&newc->node, head);
-
-    if (!io)
-	return 1;
 
     if ((newc->fd = open(newc->tty, O_WRONLY|O_NONBLOCK|O_NOCTTY)) < 0) {
 	if (errno == EACCES)
 	    error("can not open %s", newc->tty);
 	warn("can not open %s", newc->tty);
-	free(newc);
 	return 0;
     }
 
@@ -581,6 +554,40 @@ static int consalloc(struct console **cons, char *name, const int cflags, const 
     tflags |=   O_NOCTTY;
     if (fcntl(newc->fd, F_SETFL, tflags) < 0)
 	warn("can not set terminal flags of %s", newc->tty);
+
+    return 1;
+}
+
+/* Allocate a console */
+static list_t lcons = { &(lcons), &(lcons) };
+static int consalloc(struct console **cons, char *name, const int cflags, const dev_t dev, int io)
+{
+    struct console *newc;
+    list_t *head;
+
+    if (!cons)
+	error("missing console pointer");
+
+    if (posix_memalign((void**)&newc, sizeof(void*), alignof(struct console)+strlen(name)+1) != 0 || !newc)
+	error("memory allocation");
+
+    newc->tty = ((char*)newc)+alignof(struct console);
+    strcpy(newc->tty, name);
+    newc->flags = cflags;
+    newc->dev = dev;
+    newc->pid = -1;
+
+    if (io && !consinitIO(newc)) {
+	free(newc);
+	return 0;
+    }
+
+    if (!*cons) {
+	head = &lcons;
+	*cons = (struct console*)head;
+    } else
+	head = &(*cons)->node;
+    insert(&newc->node, head);
 
     return 1;
 }
