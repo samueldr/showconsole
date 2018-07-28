@@ -25,7 +25,7 @@ install() {
 	test  -d "${initdir}${systemdsystemunitdir}/${t}.target.wants" && continue
 	mkdir -p "${initdir}${systemdsystemunitdir}/${t}.target.wants"
     done
-    for t in systemd-ask-password-plymouth.service
+    for t in systemd-ask-password-blog.service
     do
 	test  -d "${initdir}${systemdsystemunitdir}/${t}.wants" && continue
 	mkdir -p "${initdir}${systemdsystemunitdir}/${t}.wants"
