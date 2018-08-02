@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/sysmacros.h>
 #include "libconsole.h"
 
 char *charname(const char *str)

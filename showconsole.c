@@ -10,6 +10,7 @@
  */
 
 #include <sys/types.h> /* Defines the macros major and minor */
+#include <sys/sysmacros.h> /* Defines the macros major and minor */
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <err.h>
