@@ -25,7 +25,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include <stropts.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <termios.h>
