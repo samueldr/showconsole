@@ -3,7 +3,7 @@
 The package showconsole includes several helpers which had been developed
 over the years for SUSE and openSUSE Linux. There are
 
-  * blogd       - Doe boot logging on /dev/console
+  * blogd       - Does boot logging on /dev/console
   * blogctl     - Control the boot logging daemon blogd
   * blogger     - Writes messages to a running blogd process
   * isserial    - Determines if the underlying tty of stdin is a serial line
